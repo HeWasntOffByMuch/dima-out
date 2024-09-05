@@ -26,19 +26,19 @@
     </div>
 </div>
     <script>
-        function refreshMe() {
+        document.addEventListener("DOMContentLoaded", () => {
             const timerContainer = document.querySelector('#timer');
             const oneDay = 24 * 60 * 60 * 1000;
             const firstDate = new Date(2024, 9 -1, 25);
+            let secondDate = new Date();
+            let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+            timerContainer.textContent = `Dima dima i go nima ${diffDays} days`;
             setInterval(() => {
-                const secondDate = new Date();
+                secondDate = new Date();
 
-                const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+                diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
                 timerContainer.textContent = `Dima dima i go nima ${diffDays} days`;
             }, 1000);
-        }
-        document.addEventListener("DOMContentLoaded", () => {
-            refreshMe
         });
     </script>
 </body>
