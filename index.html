@@ -26,8 +26,7 @@
     </div>
 </div>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            console.log('dima');
+        function refreshMe() {
             const timerContainer = document.querySelector('#timer');
             const oneDay = 24 * 60 * 60 * 1000;
             const firstDate = new Date(2024, 9 -1, 25);
@@ -35,8 +34,11 @@
                 const secondDate = new Date();
 
                 const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-                timerContainer.textContent = `Dima dima i go ni ma ${diffDays} days`;
+                timerContainer.textContent = `Dima dima i go nima ${diffDays} days`;
             }, 1000);
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            refreshMe
         });
     </script>
 </body>
