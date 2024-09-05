@@ -1,0 +1,43 @@
+<html>
+<head>
+    <style>
+        body {
+            background-color:black;
+            margin: 0;
+        }
+        #container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #timer {
+            color: white;
+            font-size: 64px;
+            margin: auto auto;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="timer">
+
+    </div>
+</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log('dima');
+            const timerContainer = document.querySelector('#timer');
+            const oneDay = 24 * 60 * 60 * 1000;
+            const firstDate = new Date(2024, 9 -1, 25);
+            setInterval(() => {
+                const secondDate = new Date();
+
+                const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+                timerContainer.textContent = `Dima dima i go ni ma ${diffDays} days`;
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
