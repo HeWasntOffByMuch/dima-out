@@ -9,35 +9,58 @@
             height: 100%;
             width: 100%;
             display: flex;
+            flex-direction: column;
+            row-gap: 20px;
             justify-content: center;
             align-items: center;
         }
         #timer {
             color: white;
             font-size: 64px;
-            margin: auto auto;
+        }
+        #dima {
+            position: relative;
+            background-image: url('./assets/dima.jpeg');
+            background-size: cover;
+            height: 400px;
+            width: 400px;
+        }
+        #thug {
+            position: absolute;
+            top: 0;
+            left: 59%;
+            translate: -50% 0;
+            background-image: url('./assets/glasses.png');
+            image-rendering: pixelated;
+            background-size: cover;
+            height: 100px;
+            width: 200px;
         }
     </style>
 </head>
 <body>
 <div id="container">
-    <div id="timer">
+    <div id="timer"></div>
+    <div id="dima"><div id="thug"></div></div>
 
-    </div>
 </div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const timerContainer = document.querySelector('#timer');
+            const glasses = document.querySelector('#thug');
             const oneDay = 24 * 60 * 60 * 1000;
             const firstDate = new Date(2024, 9 -1, 25);
             let secondDate = new Date();
             let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+            const startingDiffInDays = 19;
             timerContainer.textContent = `Dima dima i go nima ${diffDays} days`;
             setInterval(() => {
                 secondDate = new Date();
 
                 diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
                 timerContainer.textContent = `Dima dima i go nima ${diffDays} days`;
+
+                glasses.style.top = `${Math.max(((startingDiffInDays  - diffDays) / startingDiffInDays), 0) * 105}px`;
             }, 1000);
         });
     </script>
