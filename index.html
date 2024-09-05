@@ -1,12 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+    <title>Dima Out</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <style>
         body {
             background-color:black;
             margin: 0;
+            font-family: "Orbitron", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
         }
         #container {
-            height: 100%;
+            height: 100vh;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -14,7 +23,7 @@
             justify-content: center;
             align-items: center;
         }
-        #timer {
+        #timerContainer {
             color: white;
             font-size: 64px;
         }
@@ -36,29 +45,55 @@
             height: 100px;
             width: 200px;
         }
+
+        /* slow glow effect */
+        @keyframes daysLeft {
+            0% {
+                opacity: 1;
+            }
+            30% {
+                opacity: 0.75;
+            }
+            50% {
+                opacity: 0;
+            }
+            76% {
+                opacity: 0.75;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .animatedBlink {
+            animation: daysLeft 2.5s infinite;
+            font-weight: bold;
+            font-size: 74px;
+        }
+
     </style>
 </head>
 <body>
-<div id="container">
-    <div id="timer"></div>
-    <div id="dima"><div id="thug"></div></div>
-
-</div>
+    <div id="container">
+        <div id="timerContainer">Dime dima i go ni ma in <span id="daysLeft" class="animatedBlink">19</span> days...</div>
+        <div id="dima"><div id="thug"></div></div>
+    </div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const timerContainer = document.querySelector('#timer');
+            const timerContainer = document.querySelector('#daysLeft');
             const glasses = document.querySelector('#thug');
             const oneDay = 24 * 60 * 60 * 1000;
             const firstDate = new Date(2024, 9 -1, 25);
             let secondDate = new Date();
             let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
             const startingDiffInDays = 19;
-            timerContainer.textContent = `Dima dima i go nima ${diffDays} days`;
+            
+            timerContainer.textContent = `${diffDays}`;
             setInterval(() => {
                 secondDate = new Date();
 
                 diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-                timerContainer.textContent = `Dima dima i go nima ${diffDays} days`;
+                timerContainer.textContent = `${diffDays}`;
 
                 glasses.style.top = `${Math.max(((startingDiffInDays  - diffDays) / startingDiffInDays), 0) * 105}px`;
             }, 1000);
