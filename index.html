@@ -6,6 +6,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script src="connectionBroker.js"></script>
     <style>
         body {
             background-color:black;
@@ -39,11 +41,26 @@
             top: 0;
             left: 59%;
             translate: -50% 0;
+            transition: all 775ms;
             background-image: url('./assets/glasses.png');
             image-rendering: pixelated;
             background-size: cover;
             height: 100px;
             width: 200px;
+        }
+
+        #peers {
+            color: white;
+            font-size: 24px;
+        }
+
+        .peer-dot {
+            display: inline-block;
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            margin: 0 5px;
+            background-color: red;
         }
 
         /* slow glow effect */
@@ -76,10 +93,11 @@
 <body>
     <div id="container">
         <div id="timerContainer">Dime dima i go ni ma in <span id="daysLeft" class="animatedBlink">19</span> days...</div>
+        <div id="peers"></div>
         <div id="dima"><div id="thug"></div></div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", async () => {
             const timerContainer = document.querySelector('#daysLeft');
             const glasses = document.querySelector('#thug');
             const oneDay = 24 * 60 * 60 * 1000;
@@ -95,8 +113,10 @@
                 diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
                 timerContainer.textContent = `${diffDays}`;
 
-                glasses.style.top = `${Math.max(((startingDiffInDays  - diffDays) / startingDiffInDays), 0) * 105}px`;
+                glasses.style.translate = `-50% ${Math.max(((startingDiffInDays  - diffDays) / startingDiffInDays), 0) * 105}px`;
             }, 1000);
+
+            new ConnectionBroker();
         });
     </script>
 </body>
