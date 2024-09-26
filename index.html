@@ -1,124 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Dima Out</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
     <script src="connectionBroker.js"></script>
-    <link rel="stylesheet" href="fireworks.css">
+    <link rel="stylesheet" href="fireworks.css" />
     <style>
-        body {
-            background-color:black;
-            margin: 0;
-            font-family: "Orbitron", sans-serif;
-            font-optical-sizing: auto;
-            font-style: normal;
-        }
-        #container {
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            row-gap: 20px;
-            justify-content: center;
-            align-items: center;
-        }
-        #timerContainer {
-            color: white;
-            font-size: 64px;
-        }
-        #dima {
-            position: relative;
-            background-image: url('./assets/dima.jpeg');
-            background-size: cover;
-            height: 400px;
-            width: 400px;
-        }
-        #thug {
-            position: absolute;
-            top: 0;
-            left: 59%;
-            translate: -50% 0;
-            transition: all 775ms;
-            background-image: url('./assets/glasses.png');
-            image-rendering: pixelated;
-            background-size: cover;
-            height: 100px;
-            width: 200px;
-        }
+      body {
+        background-color: black;
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+      }
+      #container {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+      #timerContainer {
+        color: white;
+        font-size: 64px;
+      }
+      #dima {
+        position: relative;
+        background-image: url('./assets/dima.jpeg');
+        background-size: cover;
+        height: 400px;
+        width: 400px;
+      }
+      #thug {
+        position: absolute;
+        top: 0;
+        left: 59%;
+        translate: -50% 0;
+        transition: all 775ms;
+        background-image: url('./assets/glasses.png');
+        image-rendering: pixelated;
+        background-size: cover;
+        height: 100px;
+        width: 200px;
+      }
 
-        #peers {
-            color: white;
-            font-size: 24px;
-        }
+      #peers {
+        color: white;
+        font-size: 24px;
+      }
 
-        .peer-dot {
-            display: inline-block;
-            height: 10px;
-            width: 10px;
-            border-radius: 50%;
-            margin: 0 5px;
-            background-color: red;
-        }
+      .peer-dot {
+        display: inline-block;
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        margin: 0 5px;
+        background-color: red;
+      }
 
-        /* slow glow effect */
-        @keyframes daysLeft {
-            0% {
-                opacity: 1;
-            }
-            30% {
-                opacity: 0.75;
-            }
-            50% {
-                opacity: 0;
-            }
-            76% {
-                opacity: 0.75;
-            }
-            100% {
-                opacity: 1;
-            }
+      /* slow glow effect */
+      @keyframes daysLeft {
+        0% {
+          opacity: 1;
         }
-
-        .animatedBlink {
-            animation: daysLeft 2.5s infinite;
-            font-weight: bold;
-            font-size: 74px;
+        30% {
+          opacity: 0.75;
         }
+        50% {
+          opacity: 0;
+        }
+        76% {
+          opacity: 0.75;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
 
+      .animatedBlink {
+        animation: daysLeft 2.5s infinite;
+        font-weight: bold;
+        font-size: 74px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="container">
-        <div id="timerContainer">Dima dima i go ni ma in <span id="daysLeft" class="animatedBlink">19</span> days...</div>
-        <div id="peers"></div>
-        <div id="dima"><div id="thug"></div></div>
+      <div id="timerContainer">
+        Dima dima i go ni ma in <span id="daysLeft" class="animatedBlink">19</span> days...
+      </div>
+      <div id="peers"></div>
+      <div id="dima"><div id="thug"></div></div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", async () => {
-            const timerContainer = document.querySelector('#daysLeft');
-            const glasses = document.querySelector('#thug');
-            const oneDay = 24 * 60 * 60 * 1000;
-            const firstDate = new Date(2024, 9 -1, 25);
-            let secondDate = new Date();
-            let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-            const startingDiffInDays = 19;
-            
-            timerContainer.textContent = `${diffDays}`;
-            setInterval(() => {
-                secondDate = new Date();
+      document.addEventListener('DOMContentLoaded', async () => {
+        const timerContainer = document.querySelector('#daysLeft');
+        const glasses = document.querySelector('#thug');
+        const oneDay = 24 * 60 * 60 * 1000;
+        const firstDate = new Date(2024, 9 - 1, 25);
+        let secondDate = new Date();
+        let diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+        const startingDiffInDays = 19;
 
-                diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-                timerContainer.textContent = `${diffDays}`;
+        timerContainer.textContent = `${diffDays}`;
+        setInterval(() => {
+          secondDate = new Date();
 
-                glasses.style.translate = `-50% ${Math.max(((startingDiffInDays  - diffDays) / startingDiffInDays), 0) * 105}px`;
-            }, 1000);
+          diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+          timerContainer.textContent = `${diffDays}`;
 
-            new ConnectionBroker();
-        });
+          glasses.style.translate = `-50% ${
+            Math.max((startingDiffInDays - diffDays) / startingDiffInDays, 0) * 105
+          }px`;
+        }, 1000);
+
+        new ConnectionBroker();
+      });
     </script>
-</body>
+  </body>
 </html>
